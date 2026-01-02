@@ -15,16 +15,17 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    # "email":"test@gmail.com",
-    "email":"user@gmail.com",
+    "email":"test@gmail.com",
+    # "email":"user@gmail.com",
     "password":"test@123"
 }
 ######
 POST http://localhost:8080/api/bookings/user/book
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzY2OTEwMjM0LCJleHAiOjE3NjY5MTM4MzR9.NiReiJCEjU7shM-7hB3LT8DmN9wRHB_DfMVxDH0SV1FlVo04iitCEwjTCeJcARih
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc2NjkxMTYzMiwiZXhwIjoxNzY2OTE1MjMyfQ.GQvcNTZuoG-wa02TmxJEiRtYUQwEZrNJrsuf59DpAF3VmSNMqn65ihezGPGI1K2k
+Content-Type: application/json
 
 {
-    "userId":19,
+    "userId":18,
     "deskId":11,
     "startDate":"2025-02-03",
     "endDate":"2025-02-04"

@@ -5,12 +5,8 @@ import com.flexidesk.dto.RegisterRequestDTO;
 import com.flexidesk.entity.User;
 import com.flexidesk.repository.UserRepository;
 import com.flexidesk.service.AuthService;
-import com.flexidesk.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,43 +20,42 @@ import java.util.Map;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
     private final AuthService authService;
-   @PostMapping("/register")
-    public ResponseEntity<?>register (@RequestBody RegisterRequestDTO dto){
-        if(userRepository.existsByEmail(dto.getEmail())){
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO dto) {
+
+        if (userRepository.existsByEmail(dto.getEmail())) {
             return ResponseEntity.badRequest().body("Email already existed");
         }
-        User user=User.builder()
+
+        User user = User.builder()
                 .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .role(
                         dto.getRole() == null
                                 ? "USER"
-                                :  dto.getRole().toUpperCase()
+                                : dto.getRole().toUpperCase()
                 )
                 .build();
+
         userRepository.save(user);
-        return ResponseEntity.ok("User successfully registerd");
+        return ResponseEntity.ok("User successfully registered");
     }
+
     @PostMapping("/login")
-public ResponseEntity<?>login(@RequestBody LoginRequestDTO dto){
-    Authentication authentication=authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    dto.getEmail(),dto.getPassword()));
-    User user=userRepository.findByEmail(dto.getEmail()).orElseThrow();
-    String token=jwtUtil.generateToken(user.getEmail(),user.getRole());
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO dto) {
 
-    Map<String, Object> response = new HashMap<>();
-    response.put("token", token);
-    response.put("email", user.getEmail());
-    response.put("role", user.getRole());
+        String token = authService.login(dto.getEmail(), dto.getPassword());
 
-    return ResponseEntity.ok(response);
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("email", dto.getEmail());
 
-
+        return ResponseEntity.ok(response);
+    }
 }
-}
+

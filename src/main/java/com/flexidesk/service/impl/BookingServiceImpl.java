@@ -28,6 +28,7 @@ public class BookingServiceImpl implements BookingService {
         this.userRepository = userRepository;
         this.deskRepository = deskRepository;
     }
+    @SuppressWarnings("null")
     public Booking createBooking(Long userId,Long deskId, LocalDate startDate,
                                  LocalDate endDate){
         User user = userRepository.findById(userId)
@@ -60,6 +61,7 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
+    @SuppressWarnings("null")
     @Override
     public void cancelBooking(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId)
