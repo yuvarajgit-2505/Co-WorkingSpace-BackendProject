@@ -1,0 +1,46 @@
+#############
+GET http://localhost:8080/api/bookings/allbooking
+Authorization:Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc2Njg0MDA4MiwiZXhwIjoxNzY2ODQzNjgyfQ.sWDDZXdOUOGk-RPB-DM0i43TfmUKKaP_RF30wh5OYfhN55k7-EXNUJmuGwP_ND60
+#####
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+    "email":"user@gmail.com",
+    "password":"test@123",
+    "role":"USER"
+}
+#######
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    # "email":"test@gmail.com",
+    "email":"user@gmail.com",
+    "password":"test@123"
+}
+######
+POST http://localhost:8080/api/bookings/user/book
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzY2OTEwMjM0LCJleHAiOjE3NjY5MTM4MzR9.NiReiJCEjU7shM-7hB3LT8DmN9wRHB_DfMVxDH0SV1FlVo04iitCEwjTCeJcARih
+
+{
+    "userId":19,
+    "deskId":11,
+    "startDate":"2025-02-03",
+    "endDate":"2025-02-04"
+
+}
+#####
+POST http://localhost:8080/api/desks/desk
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc2NjkxMDE5MCwiZXhwIjoxNzY2OTEzNzkwfQ.CdqyQoqkiKte7zsyHENOlIVlPnLE2XXuc3qLpFcwHlLhrHfhLJ0dItE1_lCNhJ2O
+Content-Type: application/json
+
+{
+
+    "deskType":"OPEN_DESK",
+    "pricePerDay":500.0,
+    "totalSlots":3
+}
+#####
+GET http://localhost:8080/api/bookings/my
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzY2OTAzNjc2LCJleHAiOjE3NjY5MDcyNzZ9.s1h7PVc5GktaQGvm_F1O9pe93x07FJXWmAtxgpIfs05Ai4NL6YmDOXYGSodI82DR
