@@ -32,15 +32,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already existed");
         }
 
-        User user = User.builder()
-                .email(dto.getEmail())
-                .password(passwordEncoder.encode(dto.getPassword()))
-                .role(
-                        dto.getRole() == null
-                                ? "USER"
-                                : dto.getRole().toUpperCase()
-                )
-                .build();
+       User user = User.builder()
+        .email(dto.getEmail())
+        .password(passwordEncoder.encode(dto.getPassword()))
+        .role(
+            dto.getRole() == null ? "USER" : dto.getRole())
+        
+        .build();
 
         userRepository.save(user);
         return ResponseEntity.ok("User successfully registered");
