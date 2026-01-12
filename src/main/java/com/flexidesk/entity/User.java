@@ -1,6 +1,5 @@
 package com.flexidesk.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
