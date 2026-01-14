@@ -32,12 +32,12 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/register").permitAll()
-    // FOR USER
+    // USER ONLY
     .requestMatchers("/api/bookings/user/**").hasAnyRole("USER","ADMIN")
     .requestMatchers("/api/bookings/my").hasRole("USER")
     
     
-     //FOR ADMIN
+     // ADMIN ONLY
     .requestMatchers("/api/bookings/admin/**").hasRole("ADMIN")
     .requestMatchers("/api/bookings/allbooking").hasRole("ADMIN")
     .requestMatchers("/api/desks/**").hasRole("ADMIN")
