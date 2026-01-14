@@ -28,6 +28,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    @SuppressWarnings("unused")
     private final AuthService authService;
    @PostMapping("/register")
     public ResponseEntity<?>register (@RequestBody RegisterRequestDTO dto){
@@ -48,6 +49,7 @@ public class AuthController {
     }
     @PostMapping("/login")
 public ResponseEntity<?>login(@RequestBody LoginRequestDTO dto){
+    @SuppressWarnings("unused")
     Authentication authentication=authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                     dto.getEmail(),dto.getPassword()));
